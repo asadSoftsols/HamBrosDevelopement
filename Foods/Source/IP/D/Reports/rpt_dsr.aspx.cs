@@ -165,18 +165,18 @@ namespace Foods
                 lbl_discount.Text = saleper.ToString();
 
                 //for DSR Sheet
-                query = " SELECT ROW_NUMBER() OVER(ORDER BY (select 1)) AS ID, * from  v_rpt_dsr where username='" + USNAM + "' and Mdsr_dat = '" + dat + "' and  CompanyId = '" + Session["CompanyID"] + "' and BranchId= '" + Session["BranchID"] + "'";
+                query = " SELECT ROW_NUMBER() OVER(ORDER BY (select 1)) AS ID, * from  v_rpt_dsr where CreateBy='" + USNAM + "' and Mdsr_dat = '" + dat + "' and  CompanyId = '" + Session["CompanyID"] + "' and BranchId= '" + Session["BranchID"] + "'";
                 
                 //query = " select * from  v_rpt_dsr where username='" + USNAM + "' and  CompanyId = '" + Session["CompanyID"] + "' and BranchId= '" + Session["BranchID"] + "'";
                 dt_ = DBConnection.GetQueryData(query);
 
                 if (dt_.Rows.Count > 0)
                 {
-                    lbl_booker.Text = dt_.Rows[0]["username"].ToString();
+                    lbl_booker.Text = dt_.Rows[0]["CreateBy"].ToString();
                     lbl_Salman.Text = dt_.Rows[0]["Salesman"].ToString();
                     //lbl_area.Text = dt_.Rows[0]["Area"].ToString();
                     lbl_dat.Text = dt_.Rows[0]["Mdsr_dat"].ToString();
-                    totalSalary = Convert.ToDecimal(dt_.Rows[0]["ttlamt"].ToString());
+                    //totalSalary = Convert.ToDecimal(dt_.Rows[0]["ttlamt"].ToString());
                     GVdsr.DataSource = dt_;
                     GVdsr.DataBind();
 

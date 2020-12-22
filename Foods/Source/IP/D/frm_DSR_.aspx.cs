@@ -818,7 +818,7 @@ namespace Foods
                     string MDSRID = GVDSR.DataKeys[row.RowIndex].Values[0].ToString();
 
                     string cmdtxt = "select tbl_Mdsr.CustomerID, tbl_Mdsr.areaid, CustomerName,prevbal, tbl_Mdsr.saleper, recvry, replace(convert(NVARCHAR, dsrdat, 101), ' ', '/') as [dsrdat],tbl_Mdsr.dsrid from tbl_Mdsr inner join tbl_ddsr on " +
-                        " tbl_Mdsr.dsrid = tbl_ddsr.dsrid inner join Customers_ on tbl_Mdsr.CustomerID = Customers_.CustomerID  inner join Products on tbl_ddsr.ProductID = Products.ProductID " +
+                        " tbl_Mdsr.dsrid = tbl_ddsr.dsrid inner join Customers_ on tbl_Mdsr.CustomerID = Customers_.cust_acc  inner join Products on tbl_ddsr.ProductID = Products.ProductID " +
                         " where tbl_Mdsr.CompanyId = '" + Session["CompanyID"] + "' and tbl_Mdsr.BranchId= '" + Session["BranchID"] + "' and tbl_Mdsr.dsrid =" + MDSRID + "";
 
                     //string cmdtxt = " select a.mPurID, b.dPurId, b.mPurId, a.ven_id, a.VndrAdd, a.VndrCntct,a.PurNo, a.mPurDate, a.CreatedBy, a.CreatedAt, a.cnic, a.ntnno, a.tobePrntd,b.Dpurid, b.ProNam, b.ProDes, b.Qty, b.Total, b.subtotl, b.unit, b.cost, b.protyp,b.grossttal from MPurchase a  inner join DPurchase b on a.mPurID = b.mPurID where a.MPurID =" + MPurID + "";
