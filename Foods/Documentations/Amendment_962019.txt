@@ -1,0 +1,4 @@
+Ammendment in Ham Bros on 692019
+
+1.	alter table tbl_Mdsr add areaid int references tbl_Mdsr(areaid)
+2.	 Stored Procedure sp_Mdsr has been created

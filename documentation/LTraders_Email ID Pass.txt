@@ -1,0 +1,10 @@
+Lawaie Traders
+
+
+Gmail Email: LTraders1199@gmail.com
+Pass: Ltraders321
+
+
+API_KEY: AIzaSyBff4uJ7jjXh2xqK__CU8qmGk1Qtl_ULvw
+Client_ID: 193551868991-t7u878ejldndmbd3gl4p167r9m50ess7.apps.googleusercontent.com
+Your Client Secret: mZbBJFJtLBhmu3afim9rw9ys

@@ -1,0 +1,18 @@
+Ammendment 14-3-2020
+
+form created : frm_VDSR_.aspx
+alter table tbl_ddsr add finlqry float
+changes in v_rpt_dsr
+expence store procedure is come back in original form.
+changes in v_dsrinvoice
+
+Ammendment on 21-3-2020
+
+procedure sp_vchq has been created.
+changes in expense
+changes in v_dsrinvoice
+
+Ammendment on 29-3-2020
+changes in v_rpt_dsr
+tbl_booksalman table has been created
+add updateBy in tbl_Mdsr
