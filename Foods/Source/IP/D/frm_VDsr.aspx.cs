@@ -38,7 +38,7 @@ namespace Foods
                 string query = "";
                 dt_ = new DataTable();
 
-                query = " select distinct(convert(date, cast(dsrdat as date) ,103)) as [dat],  convert(varchar, dsrdat, 23) as [dsrdat], username, Isdon, Salesman " +
+                query = " select distinct(convert(date, cast(dsrdat as date) ,103)) as [dat],  convert(varchar, dsrdat, 23) as [dsrdat],tbl_mdsr.createby, username, Isdon, Salesman " +
                        " from tbl_Mdsr where tbl_Mdsr.CompanyId = '" + Session["CompanyID"] + "' and tbl_Mdsr.BranchId ='" + Session["BranchID"] + "' order by " +
                        " dsrdat desc";
 

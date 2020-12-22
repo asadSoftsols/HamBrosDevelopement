@@ -240,12 +240,12 @@
                                     <asp:BoundField DataField="ProductName" HeaderText="Item Name" SortExpression="ProductName" />
                                     <asp:BoundField DataField="QTY" HeaderText="Items" SortExpression="QTY" />
                                     <%--<asp:BoundField DataField="cartons" HeaderText="Cartons" SortExpression="cartons" />--%>                                    
-                                    <asp:BoundField DataField="finlqry" HeaderText="Sales Qty" SortExpression="finlqry" />
+                                    <asp:BoundField DataField="FQty" HeaderText="Sales Qty" SortExpression="FQty" />
                                     <asp:BoundField DataField="Boxes" HeaderText="Packets" SortExpression="Boxes" />
                                     <asp:BoundField DataField="items" HeaderText="Loose Items" SortExpression="items" />
                                     <asp:BoundField DataField="Return" HeaderText="Return" SortExpression="Return" />  
-                                    <asp:BoundField DataField="updateby" HeaderText="Return by" SortExpression="updateby" />                         
-                                    <%--<asp:BoundField DataField="salrat" HeaderText="Sales" SortExpression="salrat" />--%>                                            
+                                    <%--<asp:BoundField DataField="updateby" HeaderText="Return by" SortExpression="updateby" />                         
+                                    <asp:BoundField DataField="salrat" HeaderText="Sales" SortExpression="salrat" />--%>                                            
                                     <asp:BoundField DataField="salrat" HeaderText="Rate" SortExpression="salrat" />  
                                     <asp:BoundField DataField="Amount" HeaderText="Amount" SortExpression="Amount" />  
                                 </Columns>  
