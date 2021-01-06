@@ -38,8 +38,9 @@ namespace Foods
                 string query = "";
                 dt_ = new DataTable();
 
-                query = " select distinct(convert(date, cast(dsrdat as date) ,103)) as [dat],  convert(varchar, dsrdat, 23) as [dsrdat],tbl_mdsr.createby, username, Isdon, Salesman " +
-                       " from tbl_Mdsr where tbl_Mdsr.CompanyId = '" + Session["CompanyID"] + "' and tbl_Mdsr.BranchId ='" + Session["BranchID"] + "' order by " +
+                query = " select distinct(convert(date, cast(dsrdat as date) ,103)) as [dat],dsrid,  convert(varchar, dsrdat, 23) as [dsrdat], " +
+                    " tbl_mdsr.createby, username, Isdon, salmanid as [Salesman]  from tbl_Mdsr " +
+                    " inner join tbl_booksalman on tbl_booksalman.booksalman = tbl_mdsr.Salesman where tbl_Mdsr.CompanyId = '" + Session["CompanyID"] + "' and tbl_Mdsr.BranchId ='" + Session["BranchID"] + "' order by " +
                        " dsrdat desc";
 
 
@@ -111,11 +112,12 @@ namespace Foods
                  {
                      GridViewRow row = (GridViewRow)(((LinkButton)e.CommandSource).NamingContainer);
 
-                     string dsrid = GVDSR.DataKeys[row.RowIndex].Values[0].ToString();
+                     string dsrdat = GVDSR.DataKeys[row.RowIndex].Values[0].ToString();
+                     string dsrid = GVDSR.DataKeys[row.RowIndex].Values[2].ToString();
                      string Username = GVDSR.DataKeys[row.RowIndex].Values[1].ToString();
           
                      //frm_loadsheet_ScriptManager.RegisterStartupScript(this, this.GetType(), "onclick", "javascript:window.open( '.aspx?DSRID=" + id + "&DSRID=" +  + ",'_blank','height=600px,width=600px,scrollbars=1');", true);
-                     ScriptManager.RegisterStartupScript(this, this.GetType(), "onclick", "javascript:window.open( 'Reports/rpt_dsr.aspx?date=" + dsrid + "&USNAM=" + Username + "','_blank','height=600px,width=600px,scrollbars=1');", true);
+                     ScriptManager.RegisterStartupScript(this, this.GetType(), "onclick", "javascript:window.open( 'Reports/rpt_dsr.aspx?date=" + dsrdat + "&USNAM=" + Username + "&DSRID=" + dsrid + "','_blank','height=600px,width=600px,scrollbars=1');", true);
                  }
                  else if (e.CommandName == "loadsht")
                  {

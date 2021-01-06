@@ -143,7 +143,7 @@
                     <div class="right">
                 Bill No : <asp:Label ID="lblbilno" runat="server"></asp:Label><br />
                 Order / Delv Date : <asp:Label ID="lblsaldat" runat="server"></asp:Label><br />
-                Booker / SalesMan : <asp:Label ID="lblbooker" runat="server"></asp:Label> / <asp:Label ID="lbl_salman" runat="server"></asp:Label><br />
+                Booker : <asp:Label ID="lblbooker" runat="server"></asp:Label> / Salesman: <asp:Label  ID="lbl_salman" runat="server"></asp:Label><br />
             </div>
 
                 <table style="width:100%; float:right;">

@@ -216,7 +216,7 @@
         </div>
         <div class="clear"></div>
         <div class="left">
-            <b>Booker Name:</b> <asp:Label ID="lbl_booker" runat="server" ></asp:Label> / <b>Sales Man:</b> <asp:Label ID="lbl_Salman" runat="server" ></asp:Label><br />
+            <b>Booker Name:</b> <asp:Label ID="lbl_booker" runat="server" ></asp:Label> /Sales Man:<asp:Label ID="lbl_Salman"  runat="server" ></asp:Label><br />
         </div>
         <div class="left">
            <b>Date:</b> <asp:Label ID="lbl_dat" runat="server" ></asp:Label><br />

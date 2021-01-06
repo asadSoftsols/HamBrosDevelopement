@@ -58,7 +58,7 @@ namespace Foods
                     " inner join tbl_ddsr on tbl_Mdsr.dsrid = tbl_ddsr.dsrid " +
                     " inner join Customers_ on tbl_Mdsr.CustomerID = Customers_.cust_acc " +
                     " inner join tbl_Salcredit on tbl_Mdsr.CustomerID = tbl_Salcredit.CustomerID " +
-                    " where tbl_Mdsr.dsrdat = '" + dat + "' and tbl_Mdsr.CreateBy='" + USNAM + "'" +
+                    " where tbl_Mdsr.dsrdat = '" + dat + "' and tbl_Mdsr.dsrid='" + id + "'" +
                     " group by tbl_Mdsr.dsrid, tbl_Mdsr.CustomerID,CustomerName,[Address], dsrdat, tbl_mdsr.saleper,furout,Salesman ";
 
                 dtcredit_ = DBConnection.GetQueryData(query);
@@ -100,7 +100,7 @@ namespace Foods
                    " inner join tbl_ddsr on tbl_Mdsr.dsrid = tbl_ddsr.dsrid " +
                    " inner join Customers_ on tbl_Mdsr.CustomerID = Customers_.cust_acc " +
                    " inner join tbl_Salcredit on tbl_Mdsr.CustomerID = tbl_Salcredit.CustomerID " +
-                   " where tbl_Mdsr.dsrdat = '" + dat + "' and tbl_Mdsr.CreateBy='" + USNAM + "'" +
+                   " where tbl_Mdsr.dsrdat = '" + dat + "' and tbl_Mdsr.dsrid='" + id + "'" +
                    " group by tbl_Mdsr.dsrid, tbl_Mdsr.CustomerID, " +
                    " CustomerName,[Address], dsrdat, tbl_mdsr.saleper";
 
@@ -151,7 +151,7 @@ namespace Foods
                 //For diccount
 
                 //query = "select sum(tbl_Mdsr.saleper) as [saleper] from  tbl_Mdsr  inner join tbl_ddsr on tbl_Mdsr.dsrid = tbl_ddsr.dsrid  inner join Customers_ on tbl_Mdsr.CustomerID = Customers_.CustomerID where tbl_Mdsr.dsrdat = '" + dat + "'";
-                query = "select left(SUM(saleper)/count(saleper),6) as [saleper] from tbl_mdsr where dsrdat= '" + dat + "' and tbl_Mdsr.CreateBy='" + USNAM + "'";
+                query = "select left(SUM(saleper)/count(saleper),6) as [saleper] from tbl_mdsr where dsrdat= '" + dat + "' and tbl_Mdsr.dsrid='" + id + "'";
 
                 dt_ = DBConnection.GetQueryData(query);
 
@@ -165,7 +165,7 @@ namespace Foods
                 lbl_discount.Text = saleper.ToString();
 
                 //for DSR Sheet
-                query = " SELECT ROW_NUMBER() OVER(ORDER BY (select 1)) AS ID, * from  v_rpt_dsr where CreateBy='" + USNAM + "' and Mdsr_dat = '" + dat + "' and  CompanyId = '" + Session["CompanyID"] + "' and BranchId= '" + Session["BranchID"] + "'";
+                query = " SELECT ROW_NUMBER() OVER(ORDER BY (select 1)) AS ID, * from  v_rpt_dsr where dsrid='" + id + "' and Mdsr_dat = '" + dat + "' and  CompanyId = '" + Session["CompanyID"] + "' and BranchId= '" + Session["BranchID"] + "'";
                 
                 //query = " select * from  v_rpt_dsr where username='" + USNAM + "' and  CompanyId = '" + Session["CompanyID"] + "' and BranchId= '" + Session["BranchID"] + "'";
                 dt_ = DBConnection.GetQueryData(query);
@@ -266,7 +266,7 @@ namespace Foods
                     " inner join tbl_Mdsr on tbl_ddsr.dsrid  = tbl_Mdsr.dsrid " +
                     " inner join Customers_ on  tbl_Mdsr.CustomerID = Customers_.cust_acc" +
                     "  where tbl_Mdsr.dsrdat = '" + dat + "' and  tbl_Mdsr.CompanyId = '" +
-                    Session["CompanyID"] + "' and tbl_Mdsr.BranchId= '" + Session["BranchID"] + "' and tbl_Mdsr.CreateBy='" + USNAM + "'"; 
+                    Session["CompanyID"] + "' and tbl_Mdsr.BranchId= '" + Session["BranchID"] + "' and tbl_Mdsr.dsrid='" + id + "'"; 
 
 
                 dt_ = new DataTable();
