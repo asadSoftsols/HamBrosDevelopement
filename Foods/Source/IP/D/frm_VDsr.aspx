@@ -58,11 +58,11 @@
                             <div class="div_print">
                                 <asp:GridView ID="GVDSR" runat="server" AutoGenerateColumns="False" AllowPaging="true"
                                      PageSize="10" ShowHeaderWhenEmpty="True" CssClass="table table-striped table-bordered"
-                                     DataKeyNames="dsrdat,createby" OnPageIndexChanging="GVDSR_PageIndexChanging" OnRowCommand="GVDSR_RowCommand" OnRowDataBound="GVDSR_RowDataBound" >
+                                     DataKeyNames="dsrdat,createby,dsrid" OnPageIndexChanging="GVDSR_PageIndexChanging" OnRowCommand="GVDSR_RowCommand" OnRowDataBound="GVDSR_RowDataBound" >
                                     <Columns>                                        
                                         <asp:BoundField DataField="dsrdat" HeaderText="Date" SortExpression="dsrdat" />                                       
                                         <asp:BoundField DataField="createby" HeaderText="Booker" SortExpression="createby" />                                        
-                                        <asp:BoundField DataField="Salesman" HeaderText="Sales Man" SortExpression="Salesman" />                                        
+                                       <asp:BoundField DataField="Salesman" HeaderText="Sales Man" SortExpression="Salesman" />                                      
                                         <asp:TemplateField>
                                             <ItemTemplate>
                                                 <asp:LinkButton ID="lnkshowdsr" CommandName="showdsr" runat="server"  > DSR </asp:LinkButton>
