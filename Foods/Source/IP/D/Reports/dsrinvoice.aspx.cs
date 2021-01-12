@@ -32,6 +32,10 @@ namespace Foods
             if (check != null)
             {
                 SalID = Request.QueryString["SalID"];
+                lbl_comNam.Text = Session["Company"].ToString();
+                lbl_comAdd.Text = Session["CompanyAddress"].ToString();
+                lbl_comPhnum.Text = Session["Companyph"].ToString();
+
                 FillGrid();
             }
             else
@@ -40,7 +44,7 @@ namespace Foods
             }
         }
 
-                public void FillGrid()
+        public void FillGrid()
         {
             try
             {
