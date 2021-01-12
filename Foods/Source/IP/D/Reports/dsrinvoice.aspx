@@ -113,12 +113,12 @@
     <form id="form1" runat="server">
     <div>
         <div class="logo">
-            <img src="~/img/Lv_logo.jpg" id="imglogo" width="150" height="70" alt="" runat="server" />
+            <%--<img src="~/img/Lv_logo.jpg" id="imglogo" width="150" height="70" alt="" runat="server" />--%>
         </div>
         <div class="comp">
             <div class="uppper">
-                <h1>Lawai Traders</h1>
-                <h3>Plot # MC.41 Sector  6.D mehran town korangi Industrial Area<br /> 0333-3896390</h3>
+                <h1><asp:Label ID="lbl_comNam" runat="server"></asp:Label></h1>
+                <h3><asp:Label ID="lbl_comAdd" runat="server"></asp:Label><br /> <asp:Label ID="lbl_comPhnum" runat="server"></asp:Label></h3>
                 <h2>CASH MEMO</h2>
             </div>
         </div>
