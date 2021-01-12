@@ -31,6 +31,10 @@ namespace Foods
             id = Request.QueryString["DSRID"];
             dat = Request.QueryString["date"];
             USNAM = Request.QueryString["USNAM"];
+            lbl_comNam.Text = Session["Company"].ToString();
+            lbl_comAdd.Text = Session["CompanyAddress"].ToString();
+            lbl_comPhnum.Text = Session["Companyph"].ToString();
+            
 
             if (check != null)
             {

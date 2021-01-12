@@ -19,7 +19,7 @@
       <property name="connection.driver_class">NHibernate.Driver.SqlClientDriver</property>
       <!--<property name="connection.connection_string">Data Source=THERE\SQLSERVER2K8;Initial Catalog=eCorpStructure-CMS;User ID=sa;Password=sa</property>-->
       <!--<property name="connection.connection_string">Data Source=UMAID-PC;Initial Catalog=HumBros;User ID=sa;Password=Ltraders123</property>-->
-      <property name="connection.connection_string">Data Source=ASAD-PC;Initial Catalog=HumBros;User ID=sa;Password=friends</property>
+      <property name="connection.connection_string">Data Source=43.255.152.21;Initial Catalog=HamBros_;User ID=ph11780237212_;Password=*1jaH6d8</property>
 
       <property name="dialect">NHibernate.Dialect.MsSql2012Dialect</property>
       <property name="hbm2ddl.keywords">none</property>

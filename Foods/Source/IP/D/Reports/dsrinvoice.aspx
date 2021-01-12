@@ -113,7 +113,7 @@
     <form id="form1" runat="server">
     <div>
         <div class="logo">
-            <img src="~/img/Lv_logo.jpg" id="imglogo" width="150" height="70" alt="" runat="server" />
+            <%--<img src="~/img/Lv_logo.jpg" id="imglogo" width="150" height="70" alt="" runat="server" />--%>
         </div>
         <div class="comp">
             <div class="uppper">
