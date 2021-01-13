@@ -164,7 +164,7 @@ namespace Foods
             int o;
             con.Close();
             con.Open();
-            SqlCommand cm = new SqlCommand("select area_ from tbl_area where area_='" + TBArea.Text.Trim() + "'", con);
+            SqlCommand cm = new SqlCommand("select area_ from tbl_area where area_='" + TBArea.Text.Trim() + "' and companyid='" + Session["CompanyID"].ToString() + "' and branchid='" + Session["BranchID"].ToString() + "'", con);
             SqlDataReader dr = cm.ExecuteReader();
             if (dr.Read())
             {
