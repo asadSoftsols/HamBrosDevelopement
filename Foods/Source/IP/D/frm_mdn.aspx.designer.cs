@@ -328,6 +328,15 @@ namespace Foods {
         protected global::System.Web.UI.WebControls.HiddenField HFDebtNot;
         
         /// <summary>
+        /// lbl_head control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_head;
+        
+        /// <summary>
         /// lblalert control.
         /// </summary>
         /// <remarks>

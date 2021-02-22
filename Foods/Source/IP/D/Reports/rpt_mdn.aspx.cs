@@ -33,6 +33,9 @@ namespace Foods
             {
                 MDNID = Request.QueryString["MDNID"];
                 FillGrid();
+                lbl_comNam.Text = Session["Company"].ToString();
+                lbl_comAdd.Text = Session["CompanyAddress"].ToString();
+                lbl_comPhnum.Text = Session["Companyph"].ToString();
             }
             else
             {

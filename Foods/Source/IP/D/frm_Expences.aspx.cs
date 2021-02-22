@@ -1195,6 +1195,163 @@ namespace Foods
 
             return j;
         }
+
+        protected void TBOpeBal_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (lbl_Openbalance.Text == "0" || lbl_Openbalance.Text == "")
+                {
+                    lbl_Openbalance.Text = TBOpeBal.Text.Trim();
+                }
+                else
+                {
+                    lbl_Openbalance.Text = (Convert.ToDecimal(lbl_Openbalance.Text.Trim()) + Convert.ToDecimal(TBOpeBal.Text.Trim())).ToString();
+                    TBOpeBal.Text = lbl_Openbalance.Text;
+                }
+            }
+            catch (Exception ex)
+            {
+                lblmssg.Text = ex.Message;
+            }
+        }
+
+
+        protected void btn_saveOPeningBal_Click(object sender, EventArgs e)
+        {
+            if (DDL_CapitalInvet.SelectedValue == "0")
+            {
+                //lbl_errCapitalInvet.Text = "Please Select Account";
+            }
+            else if (TBOpeBal.Text == "" || TBOpeBal.Text == "0.00" || TBOpeBal.Text == "0")
+            {
+                //lbl_errOpenBal.Text = "Please fill the Amount";                
+            }
+            else
+            {
+                int r = 0;
+
+                r = SaveOpningBal();
+
+                if (r == 1)
+                {
+                    OpeningBal();
+
+                    DDL_CapitalInvet.SelectedValue = "0";
+                }
+            }
+
+        }
+
+
+        private int SaveOpningBal()
+        {
+            int j = 0;
+
+            con.Open();
+
+            SqlCommand command = con.CreateCommand();
+
+            SqlTransaction transaction;
+
+            // Start a local transaction.
+            transaction = con.BeginTransaction("OpenBalTrans");
+
+            // Must assign both transaction object and connection 
+            // to Command object for a pending local transaction
+            command.Connection = con;
+            command.Transaction = transaction;
+            try
+            {
+
+                command.CommandText = "expense";
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@acctitle", DDL_CapitalInvet.SelectedItem.Text);
+                command.Parameters.AddWithValue("@accno", DDL_CapitalInvet.SelectedValue.Trim());
+                command.Parameters.AddWithValue("@expensesdat", DateTime.Now.ToShortDateString());
+                command.Parameters.AddWithValue("@billno", "");
+                command.Parameters.AddWithValue("@typeofpay", "Cash");
+                command.Parameters.AddWithValue("@expencermk", "To be Get by" + DDL_CapitalInvet.SelectedItem.Text);
+                command.Parameters.AddWithValue("@cashamt", TB_CshAmtincom.Text.Trim());
+                command.Parameters.AddWithValue("@ChqDat", DateTime.Now.ToString());
+                command.Parameters.AddWithValue("@CashBnk_id", "1");
+                command.Parameters.AddWithValue("@CashBnk_nam", "");
+                command.Parameters.AddWithValue("@bankamt", "0");
+                command.Parameters.AddWithValue("@PaymentIn", TBOpeBal.Text.Trim());
+                command.Parameters.AddWithValue("@PaymentOut", "0");
+                command.Parameters.AddWithValue("@Amountpaid", TBOpeBal.Text.Trim());
+                command.Parameters.AddWithValue("@prevbal", "0");
+                command.Parameters.AddWithValue("@createat", DateTime.Now.ToString());
+                command.Parameters.AddWithValue("@createby", Session["Username"]);
+                command.Parameters.AddWithValue("@companyid", Session["CompanyID"]);
+                command.Parameters.AddWithValue("@branchid", Session["BranchID"]);
+                command.Parameters.AddWithValue("@ChqNO", "");
+                command.Parameters.AddWithValue("@OpenBal", "0");//TBOpeBal.Text.Trim());
+                command.Parameters.AddWithValue("@openingBal", lbl_Openbalance.Text.Trim());
+                command.Parameters.AddWithValue("@opening_balance", lbl_Openbalance.Text.Trim());
+
+                /*command.CommandText = "expense";
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@acctitle", TBincomacc.Text);
+                command.Parameters.AddWithValue("@accno", DDL_IncomAcc.SelectedValue.Trim());
+                command.Parameters.AddWithValue("@expensesdat", TBIncodat.Text.Trim());
+                command.Parameters.AddWithValue("@billno", TBincomBill.Text.Trim());
+                command.Parameters.AddWithValue("@typeofpay", DDL_Paytypincom.SelectedItem.Text.Trim());
+                command.Parameters.AddWithValue("@expencermk", TbincomRmks.Text.Trim());
+                command.Parameters.AddWithValue("@cashamt", TB_CshAmtincom.Text.Trim());
+                command.Parameters.AddWithValue("@ChqDat", DateTime.Now.ToString());
+                command.Parameters.AddWithValue("@CashBnk_id", "1");
+                command.Parameters.AddWithValue("@CashBnk_nam", "");
+                command.Parameters.AddWithValue("@bankamt", "0");
+                command.Parameters.AddWithValue("@PaymentIn", TB_incompaids.Text.Trim());
+                command.Parameters.AddWithValue("@PaymentOut", "0");
+                command.Parameters.AddWithValue("@Amountpaid", TB_incompaids.Text.Trim());
+                command.Parameters.AddWithValue("@prevbal", TBPrebalincom.Text.Trim());
+                command.Parameters.AddWithValue("@createat", DateTime.Now.ToString());
+                command.Parameters.AddWithValue("@createby", Session["Username"]);
+                command.Parameters.AddWithValue("@companyid", Session["CompanyID"]);
+                command.Parameters.AddWithValue("@branchid", Session["BranchID"]);
+                command.Parameters.AddWithValue("@ChqNO", "");
+                command.Parameters.AddWithValue("@OpenBal", TBOpeBal.Text.Trim());
+                command.Parameters.AddWithValue("@openingBal", lbl_Openbalance.Text.Trim());
+                command.Parameters.AddWithValue("@opening_balance", lbl_Openbalance.Text.Trim());*/
+
+                command.ExecuteNonQuery();
+
+                transaction.Commit();
+                con.Close();
+                j = 1;
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine("Commit Exception Type: {0}", ex.GetType());
+                Console.WriteLine("  Message: {0}", ex.Message);
+
+                // Attempt to roll back the transaction. 
+                try
+                {
+                    transaction.Rollback();
+                }
+                catch (Exception ex2)
+                {
+                    // This catch block will handle any errors that may have occurred 
+                    // on the server that would cause the rollback to fail, such as 
+                    // a closed connection.
+                    Console.WriteLine("Rollback Exception Type: {0}", ex2.GetType());
+                    Console.WriteLine("  Message: {0}", ex2.Message);
+                    j = 0;
+                }
+                j = 0;
+            }
+            finally
+            {
+                con.Close();
+                j = 1;
+            }
+            return j;
+        }
+
         private int Update()
         {
             int u = 1;
@@ -1681,29 +1838,29 @@ namespace Foods
         }
 
 
-        protected void TBOpeBal_TextChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                decimal openbal = 0;
+        //protected void TBOpeBal_TextChanged(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        decimal openbal = 0;
 
-                if (lbl_Openbalance.Text == "0" || lbl_Openbalance.Text == "")
-                {
-                    lbl_Openbalance.Text = TBOpeBal.Text.Trim();
-                }
-                else
-                {
-                    lbl_Openbalance.Text = (Convert.ToDecimal(lbl_Openbalance.Text.Trim()) + Convert.ToDecimal(TBOpeBal.Text.Trim())).ToString();
-                }
-                openbal += Convert.ToDecimal(lbl_Openbalance.Text);
-                TBOpeBal.Text = openbal.ToString();
+        //        if (lbl_Openbalance.Text == "0" || lbl_Openbalance.Text == "")
+        //        {
+        //            lbl_Openbalance.Text = TBOpeBal.Text.Trim();
+        //        }
+        //        else
+        //        {
+        //            lbl_Openbalance.Text = (Convert.ToDecimal(lbl_Openbalance.Text.Trim()) + Convert.ToDecimal(TBOpeBal.Text.Trim())).ToString();
+        //        }
+        //        openbal += Convert.ToDecimal(lbl_Openbalance.Text);
+        //        TBOpeBal.Text = openbal.ToString();
 
-            }
-            catch (Exception ex)
-            {
-                lblmssg.Text = ex.Message;
-            }
-        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        lblmssg.Text = ex.Message;
+        //    }
+        //}
 
         protected void TB_CshAmt_TextChanged(object sender, EventArgs e)
         {

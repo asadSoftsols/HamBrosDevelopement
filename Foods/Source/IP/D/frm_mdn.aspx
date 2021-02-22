@@ -125,9 +125,9 @@
                                     <div class="span12">
                                         <div class="controls">
                                             <div class="scrollit">
-                                                <asp:GridView ID="GVScrhMDN" runat="server" ShowHeaderWhenEmpty="true" EmptyDataText="No Record Found!"  class="table table-striped table-bordered" AllowPaging="True" PageSize="4" AutoGenerateColumns="False" DataKeyNames="Mdn_id" OnPageIndexChanging="GVScrhMDN_PageIndexChanging" OnRowCommand="GVScrhMDN_RowCommand" OnRowDeleting="GVScrhMDN_RowDeleting" >
+                                                <asp:GridView ID="GVScrhMDN" runat="server" ShowHeaderWhenEmpty="true" EmptyDataText="No Record Found!"  class="table table-striped table-bordered" AllowPaging="True" PageSize="4" AutoGenerateColumns="False" DataKeyNames="Mdn_id" OnPageIndexChanging="GVScrhMDN_PageIndexChanging" OnRowCommand="GVScrhMDN_RowCommand" OnRowDeleting="GVScrhMDN_RowDeleting" OnRowDataBound="GVScrhMDN_RowDataBound" >
                                                     <Columns>
-                                                        <asp:BoundField DataField="ID" HeaderText="ID" SortExpression="ID" />
+                                                        <asp:BoundField DataField="Mdn_id" HeaderText="ID" SortExpression="Mdn_id" />
                                                         <asp:BoundField DataField="CustomerName" HeaderText="Customer" SortExpression="CustomerName" />
                                                         <asp:BoundField DataField="dat" HeaderText="Date" SortExpression="dat" />
                                                         <asp:BoundField DataField="CreatedBy" HeaderText="Created By" SortExpression="CreatedBy" />                                            
@@ -355,7 +355,7 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title">Error!</h4>
+                            <h4 class="modal-title"><asp:Label ID="lbl_head" runat="server"></asp:Label></h4>
                         </div>
                         <!-- dialog body -->
                         <div class="modal-body">
@@ -363,7 +363,7 @@
                         </div>
                         <!-- dialog buttons -->
                         <div class="modal-footer">
-                            <asp:LinkButton ID="btnalertOk" runat="server" CssClass="btn btn-success" Text="OK" ></asp:LinkButton>
+                            <asp:LinkButton ID="btnalertOk" runat="server" CssClass="btn btn-success" OnClick="btnalertOk_Click" Text="OK" ></asp:LinkButton>
                         </div>
                     </div>
                 </div>
