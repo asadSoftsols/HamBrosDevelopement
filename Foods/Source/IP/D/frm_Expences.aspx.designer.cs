@@ -67,6 +67,69 @@ namespace Foods {
         protected global::System.Web.UI.WebControls.TextBox TBOpeBal;
         
         /// <summary>
+        /// lbl_errOpenBal control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_errOpenBal;
+        
+        /// <summary>
+        /// CV_Openbalance control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CompareValidator CV_Openbalance;
+        
+        /// <summary>
+        /// RFV_Openbalance control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RFV_Openbalance;
+        
+        /// <summary>
+        /// DDL_CapitalInvet control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DDL_CapitalInvet;
+        
+        /// <summary>
+        /// lbl_errCapitalInvet control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_errCapitalInvet;
+        
+        /// <summary>
+        /// RFV_CapitalInvet control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RFV_CapitalInvet;
+        
+        /// <summary>
+        /// btn_saveOPeningBal control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_saveOPeningBal;
+        
+        /// <summary>
         /// pnl_bnkopnbal control.
         /// </summary>
         /// <remarks>

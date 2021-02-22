@@ -129,17 +129,36 @@
                                          <asp:Label ID="lbl_Openbalance" runat="server" Text="0"></asp:Label>
                                      </div>
                                     <div class="span12">
-                                        <div class="span5">
-                                            <asp:Label ID="lbl_openbal" runat="server" Text="Amount Variation"></asp:Label>
-                                            <asp:TextBox ID="TBOpeBal" AutoPostBack="true" OnTextChanged="TBOpeBal_TextChanged"  runat="server" Height="20px" Width="190px" placeholder="Enter OPening Balance.."></asp:TextBox>
-                                        </div>
-                                        <div class="span5">
+                                        <div class="span10">
+                                                <asp:Label ID="lbl_openbal" runat="server" Text="Amount Variation"></asp:Label>
+                                                <asp:TextBox ID="TBOpeBal" AutoPostBack="true" CssClass="span3" OnTextChanged="TBOpeBal_TextChanged" style="white-space: nowrap;" Text="0" runat="server" Height="20px" Width="190px" placeholder="Enter Opening Balance.."></asp:TextBox>
+                                                <asp:Label ID="lbl_errOpenBal" ForeColor="Red" Font-Size="Medium" runat="server"></asp:Label>
+                                                <asp:CompareValidator ID="CV_Openbalance" runat="server" ValueToCompare="0" ForeColor="Red" Font-Italic="true" Display="Dynamic" ControlToValidate="TBOpeBal" ValidationGroup="OpeningBalance" ErrorMessage="Please fill this field" Operator="NotEqual" Type="Integer"></asp:CompareValidator>
+                                                <asp:RequiredFieldValidator ID="RFV_Openbalance" runat="server" ErrorMessage="Please fill the Amount"  ForeColor="Red" Font-Italic="true" Display="Dynamic" ValidationGroup="OpeningBalance" ControlToValidate="TBOpeBal"></asp:RequiredFieldValidator>
+                                            <asp:DropDownList ID="DDL_CapitalInvet"  CssClass="span3" runat="server">
+                                                <asp:ListItem Value="0">-- Select Account --</asp:ListItem>
+                                                <asp:ListItem Value="1">Owner Investment</asp:ListItem>
+                                                <asp:ListItem Value="2">Capital Investment</asp:ListItem>
+                                            </asp:DropDownList>
+                                            <asp:Label ID="lbl_errCapitalInvet" ForeColor="Red" Font-Size="Medium" runat="server"></asp:Label>
+                                            <asp:RequiredFieldValidator ID="RFV_CapitalInvet" InitialValue="0" runat="server" ErrorMessage="Please Select Account" ForeColor="Red" Font-Italic="true" Display="Dynamic" ValidationGroup="OpeningBalance" ControlToValidate="DDL_CapitalInvet"></asp:RequiredFieldValidator>
+                                           <div class="span1"></div>
+                                            <asp:Button ID="btn_saveOPeningBal" CssClass="btn btn-primary" ValidationGroup="OpeningBalance" runat="server" Text="Save" OnClick="btn_saveOPeningBal_Click" />
                                             <asp:Panel runat="server" ID="pnl_bnkopnbal">
                                                 <asp:Label ID="lbl_bnkopenbal" runat="server" Text="Bank Opening Balance"></asp:Label>
                                                 <asp:TextBox ID="TBBnkOpenBal" AutoPostBack="true"  runat="server" Height="20px" Width="190px" placeholder="Enter Bank Opening Balance.."></asp:TextBox>
                                             </asp:Panel>
                                         </div>
-                                    </div>
+                                     </div>
+                                    <%--<div class="span12">
+                                        <div class="span5">
+                                            <asp:Label ID="lbl_openbal" runat="server" Text="Amount Variation"></asp:Label>
+                                            <asp:TextBox ID="TBOpeBal" AutoPostBack="true" OnTextChanged="TBOpeBal_TextChanged"  runat="server" Height="20px" Width="190px" placeholder="Enter OPening Balance.."></asp:TextBox>
+                                        </div>
+                                        <div class="span5">
+                                            
+                                        </div>
+                                    </div>--%>
                                      <div class="span12" style="text-align:center;">                                      
                                        <asp:Button ID="btn_pay" runat="server" Text="Payments" CssClass="btn btn-info" OnClick="btn_pay_Click" />
                                        <asp:Button ID="btn_incm" runat="server" Text="Recieve" CssClass="btn btn-success" OnClick="btn_incm_Click" />

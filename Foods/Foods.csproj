@@ -253,6 +253,7 @@
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
+    <Content Include="Documentations\ReadMe.txt" />
     <Content Include="Images\Softsol_logo.png" />
     <Content Include="img\logo_inv.png" />
     <Content Include="Apps\img\progress.gif" />

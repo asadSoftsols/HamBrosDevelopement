@@ -24,7 +24,7 @@ namespace Foods
         SqlCommand cmd = new SqlCommand();
         DataTable dt_ = null;
         string query, Mdn_id, stkqty, salretnreasn;
-        int chkdetails;
+        int chkdetails, index;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -233,8 +233,9 @@ namespace Foods
                 }
             }
             catch (Exception ex)
-            {
+            {   
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "isActive", "Alert();", true);
+                lbl_head.Text = "Error!";
                 lblalert.Text = ex.Message;
             }
 
@@ -258,11 +259,13 @@ namespace Foods
                 FillGrid();
 
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "isActive", "Alert();", true);
+                lbl_head.Text = "Sucess";
                 lblalert.Text = MDNID + " has been Deleted!";
             }
             catch (Exception ex)
             {
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "isActive", "Alert();", true);
+                lbl_head.Text = "Error!";
                 lblalert.Text = ex.Message;
             }
         }
@@ -358,33 +361,45 @@ namespace Foods
             }
             catch (Exception ex)
             {
-                throw ex;
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "isActive", "Alert();", true);
+                lbl_head.Text = "Error!";
+                lblalert.Text = ex.Message;
             }
         }
 
         protected void btnCancl_Click(object sender, EventArgs e)
         {
-            Clear();
+            Response.Redirect("frm_mdn.aspx");
+            //Clear();
         }
 
         protected void GVDNItm_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            if (ViewState["dt_adItm"] != null)
+            try
             {
-                DataTable dt = (DataTable)ViewState["dt_adItm"];
-                DataRow drCurrentRow = null;
-                int rowIndex = Convert.ToInt32(e.RowIndex);
-                if (dt.Rows.Count > 1)
+                if (ViewState["dt_adItm"] != null)
                 {
-                    dt.Rows.Remove(dt.Rows[rowIndex]);
-                    drCurrentRow = dt.NewRow();
-                    ViewState["dt_adItm"] = dt;
+                    DataTable dt = (DataTable)ViewState["dt_adItm"];
+                    DataRow drCurrentRow = null;
+                    int rowIndex = Convert.ToInt32(e.RowIndex);
+                    if (dt.Rows.Count > 1)
+                    {
+                        dt.Rows.Remove(dt.Rows[rowIndex]);
+                        drCurrentRow = dt.NewRow();
+                        ViewState["dt_adItm"] = dt;
 
-                    GVDNItm.DataSource = dt;
-                    GVDNItm.DataBind();
+                        GVDNItm.DataSource = dt;
+                        GVDNItm.DataBind();
 
-                    SetPreRowitm();
+                        SetPreRowitm();
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "isActive", "Alert();", true);
+                lbl_head.Text = "Error!";
+                lblalert.Text = ex.Message;
             }
         }
 
@@ -416,8 +431,8 @@ namespace Foods
                 {
                     DataTable dt_po = new DataTable();
 
-                   string queryString = " select distinct(tbl_Mdn.Mdn_id),Mdn_dat,tbl_Mdn.CreatedBy,tbl_Mdn.CreatedAt,tbl_Mdn.ISActive,CustomerName from tbl_Mdn inner join tbl_Ddn on   tbl_Mdn.Mdn_id = tbl_Ddn.Mdn_id " +
-                        " inner join Customers_ on tbl_Mdn.CustomerID = Customers_.CustomerID where tbl_Mdn.Mdn_id='" + TBSearchDebtNot.Text.Trim() + "' and tbl_Mdn.ISActive = '1' and" +
+                    string queryString = " select distinct(tbl_Mdn.Mdn_id), ROW_NUMBER() OVER(ORDER BY (select 1)) AS ID,Mdn_dat,convert(varchar, Mdn_dat, 23) as [dat],tbl_Mdn.CreatedBy,tbl_Mdn.CreatedAt,tbl_Mdn.ISActive,CustomerName from tbl_Mdn inner join tbl_Ddn on   tbl_Mdn.Mdn_id = tbl_Ddn.Mdn_id " +
+                        " inner join Customers_ on tbl_Mdn.CustomerID = Customers_.cust_acc where CustomerName='" + TBSearchDebtNot.Text.Trim() + "' and tbl_Mdn.ISActive = '1' and" +
                         " tbl_Mdn.CompanyId = '" + Session["CompanyID"] + "' and tbl_Mdn.BranchId= '" + Session["BranchID"] + "'" +
                         " order by tbl_Mdn.Mdn_id desc ";
 
@@ -431,9 +446,11 @@ namespace Foods
                     FillGrid();
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                throw;
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "isActive", "Alert();", true);
+                lbl_head.Text = "Error!";
+                lblalert.Text = e.Message;
             }
         }
 
@@ -562,7 +579,10 @@ namespace Foods
             finally
             {
                 con.Close();
-                Clear();
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "isActive", "Alert();", true);
+                lbl_head.Text = "Sucess!";
+                lblalert.Text ="Sales Has been Return!";
+                //Clear();
                 //Response.Redirect("frm_Sal.aspx");
             }
             //}
@@ -603,6 +623,7 @@ namespace Foods
             catch (Exception ex)
             {
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "isActive", "Alert();", true);
+                lbl_head.Text = "Error!";
                 lblalert.Text = ex.Message;
             }
         }
@@ -615,6 +636,7 @@ namespace Foods
             catch (Exception ex)
             {
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "isActive", "Alert();", true);
+                lbl_head.Text = "Error!";
                 lblalert.Text = ex.Message;
             }
             finally
@@ -708,7 +730,7 @@ namespace Foods
                 DataTable dt_ = new DataTable();
                 query = " select distinct(tbl_Mdn.Mdn_id), ROW_NUMBER() OVER(ORDER BY (select 1)) AS ID, convert(varchar, Mdn_dat, 23) as [dat],Mdn_dat, " +
                     " tbl_Mdn.CreatedBy,tbl_Mdn.CreatedAt,tbl_Mdn.ISActive,CustomerName from tbl_Mdn inner join tbl_Ddn on   tbl_Mdn.Mdn_id = tbl_Ddn.Mdn_id " +
-                    " inner join Customers_ on tbl_Mdn.CustomerID = Customers_.CustomerID where tbl_Mdn.ISActive = '1' and" +
+                    " inner join Customers_ on tbl_Mdn.CustomerID = Customers_.cust_acc where tbl_Mdn.ISActive = '1' and" +
                     " tbl_Mdn.CompanyId = '" + Session["CompanyID"] + "' and tbl_Mdn.BranchId= '" + Session["BranchID"] + "'" +
                     " order by tbl_Mdn.Mdn_id desc ";
 
@@ -723,6 +745,7 @@ namespace Foods
             catch (Exception ex)
             {
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "isActive", "Alert();", true);
+                lbl_head.Text = "Error!";
                 lblalert.Text = ex.Message;
             }
 
@@ -751,6 +774,7 @@ namespace Foods
             catch (Exception ex)
             {
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "isActive", "Alert();", true);
+                lbl_head.Text = "Error!";
                 lblalert.Text = ex.Message;
             }
         }
@@ -794,7 +818,7 @@ namespace Foods
 
                     ddl_Cust.DataSource = dtCusNam;
                     ddl_Cust.DataTextField = "CustomerName";
-                    ddl_Cust.DataValueField = "CustomerID";
+                    ddl_Cust.DataValueField = "cust_acc";
                     ddl_Cust.DataBind();
                     ddl_Cust.Items.Add(new ListItem("--Select--", "0"));
 
@@ -846,6 +870,7 @@ namespace Foods
             catch (Exception ex)
             {
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "isActive", "Alert();", true);
+                lbl_head.Text = "Error!";
                 lblalert.Text = ex.Message;
             }
         }
@@ -889,7 +914,9 @@ namespace Foods
             }
             catch (Exception ex)
             {
-                throw ex;
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "isActive", "Alert();", true);
+                lbl_head.Text = "Error!";
+                lblalert.Text = ex.Message;
             }
         }
 
@@ -905,28 +932,37 @@ namespace Foods
 
         protected void TBReason_TextChanged(object sender, EventArgs e)
         {
-            query = "select * from tbl_salretnreasn where salreturnreason='" + TBReason.Text.Trim() + "' and CompanyId = '" + Session["CompanyID"] + "' and BranchId= '" + Session["BranchID"] + "'";
-
-            dt_ = DBConnection.GetQueryData(query);
-
-            if (dt_.Rows.Count > 0)
+            try
             {
-                //Do Noting
-            }
-            else
-            {
-                string reasonid = RandomNumber().ToString();
+                query = "select * from tbl_salretnreasn where salreturnreason='" + TBReason.Text.Trim() + "' and CompanyId = '" + Session["CompanyID"] + "' and BranchId= '" + Session["BranchID"] + "'";
 
-                query = " INSERT INTO tbl_salretnreasn " +
-                                " ([salreturnreason],[CompanyId],[BranchId]) VALUES('" + TBReason.Text.Trim() 
-                                + "','" + Session["CompanyID"] + "','" + Session["BranchID"] + "')";
-                con.Open();
+                dt_ = DBConnection.GetQueryData(query);
 
-                using (SqlCommand cmd = new SqlCommand(query, con))
+                if (dt_.Rows.Count > 0)
                 {
-                    cmd.ExecuteNonQuery();
+                    //Do Noting
                 }
-                con.Close();
+                else
+                {
+                    string reasonid = RandomNumber().ToString();
+
+                    query = " INSERT INTO tbl_salretnreasn " +
+                                    " ([salreturnreason],[CompanyId],[BranchId]) VALUES('" + TBReason.Text.Trim()
+                                    + "','" + Session["CompanyID"] + "','" + Session["BranchID"] + "')";
+                    con.Open();
+
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+                    con.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "isActive", "Alert();", true);
+                lbl_head.Text = "Error!";
+                lblalert.Text = ex.Message;
             }
         }
 
@@ -990,9 +1026,38 @@ namespace Foods
             catch (Exception ex)
             {
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "isActive", "Alert();", true);
+                lbl_head.Text = "Error!";
                 lblalert.Text = ex.Message;
             }
 
+        }
+
+        protected void GVScrhMDN_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            try
+            {
+                if (e.Row.RowType == DataControlRowType.DataRow)
+                {
+                    //var btn = (LinkButton)e.Row.FindControl("LBtnDel");
+                    //btn.OnClientClick = "return confirm('Do you really want to delete this record?'); return false;";
+                    //btn.OnClientClick = "Alert();  return false;";
+                    //lbl_head.Text = "Warning!";
+                    //lblalert.Text = "Do you really want to delete this record?";
+                    //btn.Click = GVScrhMDN.DataKeys[e.Row.RowIndex].Values[0].ToString();
+
+                }
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "isActive", "Alert();", true);
+                lbl_head.Text = "Error!";
+                lblalert.Text = ex.Message;
+            }
+        }
+
+        protected void btnalertOk_Click(object sender, EventArgs e)
+        {
+            //string mdnid = GVScrhMDN.DataKeys[index].Values[0].ToString();//GVScrhMDN.DataKeys[GVScrhMDN.SelectedIndex].Values[0].ToString();
         }
     }
 }

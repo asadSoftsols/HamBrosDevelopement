@@ -133,11 +133,11 @@
     <div>
         <div id="Div1">
 	        <div class="header">
-		        <div class="header_left">
-			        <img src="../../../../img/Lv_logo.jpg" alt="logo" class="logo" />
+		        <div class="header_left">			       
 		        </div>
 		        <div class="header_right">
-                    <b></b>
+                   <h1><asp:Label ID="lbl_comNam" runat="server"></asp:Label></h1>                
+                    <h3><asp:Label ID="lbl_comAdd" runat="server"></asp:Label><br /> <asp:Label ID="lbl_comPhnum" runat="server"></asp:Label></h3>
 		        </div>
 	        </div>
 	        <div class="clear"></div>
