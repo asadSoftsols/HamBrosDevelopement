@@ -24,7 +24,7 @@ namespace Foods
         SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["D"].ConnectionString);
         DataTable dt_;
         DBConnection db = new DBConnection();
-        string SalID;
+        string SalID, CUST;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -35,6 +35,7 @@ namespace Foods
                 lbl_comNam.Text = Session["Company"].ToString();
                 lbl_comAdd.Text = Session["CompanyAddress"].ToString();
                 lbl_comPhnum.Text = Session["Companyph"].ToString();
+                CUST = Request.QueryString["CUST"];
 
                 FillGrid();
             }
@@ -55,14 +56,15 @@ namespace Foods
 
                 
                 lbl_intro.Text = dt_.Rows[0]["Customer"].ToString();
-                lb_preout.Text = dt_.Rows[0]["Outstanding"].ToString();
+                lb_furout.Text = dt_.Rows[0]["Outstanding"].ToString();                
                 lblbilno.Text = dt_.Rows[0]["Bill"].ToString();
                 lblsaldat.Text = dt_.Rows[0]["dsrdat"].ToString();
                 lblbooker.Text = dt_.Rows[0]["CreateBy"].ToString();
                 lbl_salman.Text = dt_.Rows[0]["Salesman"].ToString();
                 lbladd.Text = dt_.Rows[0]["Address"].ToString();
                 lblph.Text = dt_.Rows[0]["PhoneNo"].ToString();
-                lbl_disc.Text = dt_.Rows[0]["Dis"].ToString(); 
+                lbl_disc.Text = dt_.Rows[0]["Dis"].ToString();
+                lbl_recov.Text = dt_.Rows[0]["Recovery"].ToString(); 
 
                 if (dt_.Rows.Count > 0)
                 {
@@ -84,7 +86,8 @@ namespace Foods
                         string disc = (Convert.ToDecimal(GTotal) * (Convert.ToDecimal(lbl_disc.Text) / 100)).ToString();
                         string total = (Convert.ToDecimal(GTotal) - Convert.ToDecimal(disc)).ToString();
                         lbl_net.Text = total;
-                        lb_currnetpay.Text = (Convert.ToDecimal(total) - Convert.ToDecimal(lb_preout.Text)).ToString();
+                        string currnetpay = (Convert.ToDecimal(total) - Convert.ToDecimal(lb_furout.Text)).ToString();
+                        lb_currnetpay.Text = (Convert.ToDecimal(currnetpay) + Convert.ToDecimal(lbl_recov.Text)).ToString();
 
                         if (disc != "")
                         {
@@ -100,6 +103,16 @@ namespace Foods
                         lb_currnetpay.Text = GTotal.ToString();
                     }
                 }
+
+                //For Previous OutStanding
+                DataTable dtcre = new DataTable();
+                dtcre = DBConnection.GetQueryData(" select * from tbl_Salcredit where customerid ='" + CUST + "'");
+
+                if (dtcre.Rows.Count > 0)
+                {
+                    lb_preout.Text = dtcre.Rows[0]["CredAmt"].ToString();
+                }
+
             }
             catch (Exception ex)
             {

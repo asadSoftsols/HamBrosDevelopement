@@ -224,9 +224,14 @@
                 </span>
                 <br />
                 <br />
-	            Current Net Payable:  <asp:Label ID="lb_currnetpay" runat="server" ></asp:Label> Rs.
+                <br />
+	            Recovery:  <asp:Label ID="lbl_recov" runat="server" Text="0" ></asp:Label> Rs.
+                <br />
+	            Current Net Payable:  <asp:Label ID="lb_currnetpay" runat="server" Text="0" ></asp:Label> Rs.
                 <br /> 
-	            Previous Outstanding: <asp:Label ID="lb_preout" runat="server" ></asp:Label>
+	            Further Outstanding: <asp:Label ID="lb_furout" runat="server" Text="0" ></asp:Label>
+                 <br /> 
+	            Previous Outstanding: <asp:Label ID="lb_preout" runat="server" Text="0" ></asp:Label>
             </div>		
         </div>
  

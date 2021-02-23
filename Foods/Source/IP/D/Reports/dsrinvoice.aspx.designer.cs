@@ -193,6 +193,15 @@ namespace Foods {
         protected global::System.Web.UI.WebControls.Label lbl_net;
         
         /// <summary>
+        /// lbl_recov control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_recov;
+        
+        /// <summary>
         /// lb_currnetpay control.
         /// </summary>
         /// <remarks>
@@ -200,6 +209,15 @@ namespace Foods {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lb_currnetpay;
+        
+        /// <summary>
+        /// lb_furout control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lb_furout;
         
         /// <summary>
         /// lb_preout control.
