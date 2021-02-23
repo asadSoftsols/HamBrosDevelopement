@@ -806,21 +806,22 @@ namespace Foods
 
             if (lvl == "1")
             {
-                dt_salman = DBConnection.GetQueryData("select  *  from Users where Level = 3 and CompanyId = '" + Session["CompanyID"] + "' and BranchId= '" + Session["BranchID"] + "'");
+                //dt_salman = DBConnection.GetQueryData("select  *  from Users where Level = 3 and CompanyId = '" + Session["CompanyID"] + "' and BranchId= '" + Session["BranchID"] + "'");
+                dt_salman = DBConnection.GetQueryData("select  distinct(salmanid) as [Username],booksalman  from tbl_booksalman where CompanyId = '" + Session["CompanyID"] + "' and BranchId= '" + Session["BranchID"] + "'");
             }
             else if (lvl == "3")
             {
-                dt_salman = DBConnection.GetQueryData("select  distinct(salmanid) as [Username]  from tbl_booksalman where salmanid = '" + Session["Username"] + "' and CompanyId = '" + Session["CompanyID"] + "' and BranchId= '" + Session["BranchID"] + "'");
+                dt_salman = DBConnection.GetQueryData("select  distinct(salmanid) as [Username],booksalman  from tbl_booksalman where salmanid = '" + Session["Username"] + "' and CompanyId = '" + Session["CompanyID"] + "' and BranchId= '" + Session["BranchID"] + "'");
             }
             else if (lvl == "2")
             {
-                dt_salman = DBConnection.GetQueryData("select  salmanid as [Username]  from tbl_booksalman where bookerid = '" + Session["Username"] + "' and CompanyId = '" + Session["CompanyID"] + "' and BranchId= '" + Session["BranchID"] + "'");
+                dt_salman = DBConnection.GetQueryData("select  salmanid as [Username],booksalman  from tbl_booksalman where bookerid = '" + Session["Username"] + "' and CompanyId = '" + Session["CompanyID"] + "' and BranchId= '" + Session["BranchID"] + "'");
             }
 
 
             DDL_Salman.DataSource = dt_salman;
             DDL_Salman.DataTextField = "Username";
-            DDL_Salman.DataValueField = "Username";
+            DDL_Salman.DataValueField = "booksalman";
             DDL_Salman.DataBind();
             DDL_Salman.Items.Insert(0, new ListItem("--Select Sales Man--", "0"));
 

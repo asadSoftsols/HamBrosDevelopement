@@ -190,15 +190,15 @@ namespace Foods
                     //    totalSalary += Convert.ToDecimal(dr["Amount"]);
                     //}
 
-                    
+                    //Gross Sales
 
-                    lbl_grosssal.Text = totalSalary.ToString();
-                    lbl_grsssal.Text = totalSalary.ToString();
+                    lbl_grosssal.Text = dt_.Rows[0]["Amount"].ToString();//totalSalary.ToString();
+                    lbl_grsssal.Text = dt_.Rows[0]["Amount"].ToString();//totalSalary.ToString();
 
                     //net sales
 
-                    string disc = (Convert.ToDecimal(totalSalary.ToString()) * (Convert.ToDecimal(lbl_discount.Text)) / 100).ToString();
-                    lbl_netsal.Text = (Convert.ToDecimal(totalSalary.ToString()) - Convert.ToDecimal(disc.Trim())).ToString();
+                    string disc = (Convert.ToDecimal(dt_.Rows[0]["Amount"]) * (Convert.ToDecimal(lbl_discount.Text)) / 100).ToString();
+                    lbl_netsal.Text = (Convert.ToDecimal(dt_.Rows[0]["Amount"]) - Convert.ToDecimal(disc.Trim())).ToString();
 
                     //net sales after recovery
                     string aftrecov = (Convert.ToDecimal(lbl_netsal.Text.Trim()) + Convert.ToDecimal(lbl_recovery.Text.Trim())).ToString();
@@ -214,6 +214,8 @@ namespace Foods
 
                     lbl_salreturn.Text = salrtren.ToString();
 
+                    //Credit
+                    lbl_cre.Text = totalSalary.ToString();
                 }
             }
             catch (Exception ex)
