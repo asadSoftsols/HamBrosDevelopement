@@ -39,19 +39,19 @@
 		    <table style="width:100%; height:200px;">
 			    <tr>
 				    <td>INV NO.</td>
-				    <td>
-                        <asp:Label ID="lblbilno" runat="server" Text=""></asp:Label>
+				    <td style="border-bottom:1px solid #000;">
+                        <b><asp:Label ID="lblbilno" runat="server" Text=""></asp:Label></b>
 				    </td>
 				    <td>O.Booker</td>
-				    <td>
-                        <asp:Label ID="lblbooker" runat="server" Text=""></asp:Label>
+				    <td style="border-bottom:1px solid #000;">
+                        <b><asp:Label ID="lblbooker" runat="server" Text=""></asp:Label></b>
 				    </td>
 				    <td>Document Type:</td>
 				    <td> INV </td>
 			    </tr>
                  <tr>
 				    <td>M/s:</td>
-				    <td><asp:Label ID="lbl_intro" runat="server" Text=""></asp:Label></td>
+				    <td style="border-bottom:1px solid #000;"><b><asp:Label ID="lbl_intro" runat="server" Text=""></asp:Label></b></td>
 				    <td></td>
 				    <td></td>
 				    <td></td>
@@ -59,7 +59,7 @@
 			    </tr>
 			    <tr>
 				    <td>Date:</td>
-				    <td> <asp:Label ID="lblsaldat" runat="server" Text=""></asp:Label></td>
+				    <td style="border-bottom:1px solid #000;"><b><asp:Label ID="lblsaldat" runat="server" Text=""></asp:Label></b></td>
 				    <td>Segment</td>
 				    <td><asp:Label ID="lbl_seg" runat="server" Text=""></asp:Label></td>
 				    <td>Driver Name #.</td>
