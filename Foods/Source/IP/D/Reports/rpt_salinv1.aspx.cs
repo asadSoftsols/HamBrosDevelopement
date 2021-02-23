@@ -98,7 +98,7 @@ namespace Foods
 
 
                     lbl_dis.Text = dtdetail_.Rows[0]["dis"].ToString();
-                    lbl_disamt.Text = dtdetail_.Rows[0]["DisAmt"].ToString();
+                    lbl_disamt.Text = (Convert.ToDecimal(dtdetail_.Rows[0]["dis"]) / 100 * Convert.ToDecimal(lbl_ttlgross.Text)).ToString();//dtdetail_.Rows[0]["DisAmt"].ToString();
                     
                     DataTable dtsalcre = new DataTable();
 
