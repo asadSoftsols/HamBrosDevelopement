@@ -111,6 +111,7 @@ namespace Foods
                 //Sales Order
                 using (SqlCommand cmd = new SqlCommand())
                 {
+                    lvl = Session["Level"].ToString();
 
                     if (lvl == "1")
                     {
