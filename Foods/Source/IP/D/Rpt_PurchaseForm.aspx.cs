@@ -344,9 +344,18 @@ namespace Foods
                     DDL_CreSal.DataBind();
                     DDL_CreSal.Items.Insert(0, new ListItem("--Select SaleMan--", "0"));
 
-                    DDL_Salesman.DataSource = dtsalmn;
+                }
+
+                //Bill Summary
+                string billSum = "select  distinct(salmanid) as [Username],booksalman  from tbl_booksalman where CompanyId = '" + Session["CompanyID"] + "' and BranchId= '" + Session["BranchID"] + "'";
+                DataTable dtbillSum = new DataTable();
+                dtbillSum = DataAccess.DBConnection.GetDataTable(billSum);
+
+                if (dtbillSum.Rows.Count > 0)
+                {
+                    DDL_Salesman.DataSource = dtbillSum;
                     DDL_Salesman.DataTextField = "Username";
-                    DDL_Salesman.DataValueField = "Username";
+                    DDL_Salesman.DataValueField = "booksalman";
                     DDL_Salesman.DataBind();
                     DDL_Salesman.Items.Insert(0, new ListItem("--Select SaleMan--", "0"));
 

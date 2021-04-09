@@ -46,13 +46,20 @@ namespace Foods
         {
             try
             {
+                DataTable dtsalman = new DataTable();
+
+                dtsalman = DBConnection.GetQueryData("select * from tbl_booksalman where booksalman ='" + salman + "'");
+                if (dtsalman.Rows.Count > 0)
+                {
+                    lbl_intro.Text = dtsalman.Rows[0]["salmanid"].ToString();
+                }
                 dt_ = new DataTable();
                 dt_ = DBConnection.GetQueryData(" select ROW_NUMBER() OVER(ORDER BY (select 1)) AS ID,* from v_billsummary where SalMan ='" + salman 
                     + "' and MSal_dat='" + dat + "'");
 
                 if (dt_.Rows.Count > 0)
                 {
-                    lbl_intro.Text = dt_.Rows[0]["SalMan"].ToString();
+                   // lbl_intro.Text = dt_.Rows[0]["SalMan"].ToString();
                     lbldat.Text = dt_.Rows[0]["dsrdat"].ToString();
 
                     GVCashMemo.DataSource = dt_;

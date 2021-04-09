@@ -111,6 +111,7 @@ namespace Foods
                 //Sales Order
                 using (SqlCommand cmd = new SqlCommand())
                 {
+                    lvl = Session["Level"].ToString();
 
                     if (lvl == "1")
                     {
@@ -879,7 +880,7 @@ namespace Foods
                         string cmdDettxt = " select ddsr,'' as [ITEM TYPE],tbl_Ddsr.ProductID, ProductName as [ITEMNAME], " +
                             " ProductName,untid as [UNITS],tbl_Ddsr.dsrid,Qty,Amt as [AMOUNT], salrat as [SALERATE], " +
                             " salrturn as [SALERETURN],recvry as [RECOVERY],outstan as [OUTSTANDING],ttlamt, " +
-                            " '' as [FUROUTSTANDING], '' as [AMOUNT],dsrrmk as [REMARKS], finlqry as [FINALQTY] from tbl_Ddsr  " +
+                            " '' as [FUROUTSTANDING], '' as [AMOUNT],dsrrmk as [REMARKS], ISNULL(finlqry, '0.00')  as [FINALQTY] from tbl_Ddsr  " +
                             "  inner join tbl_Mdsr  on tbl_Ddsr.dsrid = tbl_Mdsr.dsrid inner join Products on  tbl_Ddsr.ProductID =  Products.ProductID" +
                             "  where tbl_Mdsr.CompanyId = '" + Session["CompanyID"] + "' and  tbl_Mdsr.BranchId='" + Session["BranchID"] + "' and tbl_Ddsr.dsrid = " + MDSRID + "";
                         
